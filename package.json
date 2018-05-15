@@ -1,7 +1,7 @@
 {
-  "name": "[base-template]",
+  "name": "grocery-web",
   "version": "1.0.0",
-  "description": "Base template for webpack",
+  "description": "Web project for Grocery App",
   "main": "src/app.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
@@ -10,9 +10,9 @@
   "author": "Joshua Grierson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/encreddesign/base-template/issues"
+    "url": "https://github.com/encreddesign/groceryweb/issues"
   },
-  "homepage": "https://github.com/encreddesign/base-template#readme",
+  "homepage": "https://github.com/encreddesign/groceryweb#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.3.2",
