@@ -1,0 +1,67 @@
+/* ------ Lists ------ */
+
+.c-lists {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: block;
+
+    button {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 15px 10px;
+      overflow-x: hidden;
+      outline: 0;
+      border: none;
+      border-bottom: 1px solid $color-darkWhite;
+      font-size: $font-size-small;
+      color: $color-black;
+      text-align: left;
+      transition: all 0.3s ease-in-out;
+
+      span {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block;
+        padding: 0 20px;
+        height: 100%;
+        background-color: $color-second;
+        color: $color-white;
+        font-size: $font-size-small;
+        line-height: 47px;
+        transform: translateX(100%);
+        transition: all 0.3s ease-in-out;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $color-darkWhite;
+
+        span {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    &--placeholder {
+      button {
+        padding: 20px 10px;
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          width: calc(100% - 20px);
+          height: 20px;
+          background-color: $color-grey;
+        }
+      }
+    }
+  }
+}

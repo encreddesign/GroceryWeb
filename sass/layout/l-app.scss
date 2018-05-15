@@ -1,0 +1,16 @@
+/* ------ App ------ */
+
+.l-app {
+  display: block;
+  width: 100%;
+  @include clearfix();
+
+  &__sidepanel {
+    display: block;
+    float: left;
+    width: 30%;
+    height: 100vh;
+    border-right: 1px solid $color-second;
+    background-color: $color-white;
+  }
+}

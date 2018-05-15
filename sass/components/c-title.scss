@@ -1,0 +1,27 @@
+/* ------ Title ------ */
+
+.c-title {
+  display: block;
+  margin: 0;
+  padding: 10px;
+  font-size: $font-size-medium;
+  line-height: $font-size-medium;
+  text-transform: uppercase;
+  background-color: $color-first;
+  color: $color-white;
+  @include clearfix();
+
+  span {
+    display: inline-block;
+    
+    &:first-of-type {
+      margin-right: 10px;
+    }
+
+    &:last-of-type {
+      padding: 8px;
+      font-size: $font-size-small;
+      background-color: $color-second;
+    }
+  }
+}

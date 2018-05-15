@@ -1,0 +1,16 @@
+/* ------ Toolbar ------ */
+
+.c-toolbar {
+  display: block;
+  padding: 10px;
+  background-color: $color-second;
+
+  &__title {
+    display: block;
+    margin: 0;
+    font-size: $font-size-medium;
+    line-height: $font-size-medium;
+    text-transform: uppercase;
+    color: $color-white;
+  }
+}
