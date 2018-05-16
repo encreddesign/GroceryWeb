@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Sidepanel from "./layout/Sidepanel";
-import GroceryItems from "./layout/GroceryItems";
-import Login from "./layout/Login";
+import Site from "./routes/Site";
 
 /**
  * @class GroceryWeb
@@ -12,19 +11,15 @@ export default class GroceryWeb extends React.Component {
 
   constructor(props){
     super(props);
-
-    this.state = {
-      loggedIn: true
-    };
   }
 
   render() {
     return (
-      <div className="l-app">
-        <Sidepanel title="My Lists" />
-        <GroceryItems />
-        {!this.state.loggedIn && <Login title="Login to your Dropbox Account" />}
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Site} />
+        </Switch>
+      </BrowserRouter>
     )
   }
 }

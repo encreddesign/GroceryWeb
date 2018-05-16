@@ -17,7 +17,7 @@ export default class GroceryItems extends React.Component {
 
   render() {
     return (
-      <div className="l-grocery">
+      <div className="l-app__mainpanel  l-grocery">
         <Toolbar prefix="Hello" userName="TestUser" />
       </div>
     )

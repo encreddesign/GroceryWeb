@@ -8,13 +8,6 @@ iconSet.set("user-account", <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
 /**
  * @class Icons
  */
-export default class Icons {
-
-  /**
-   * Returns icon by name
-   * @param {String} name 
-   */
-  static getIcon(name) {
-    return iconSet.get(name);
-  }
+export default function getIcon(name) {
+  return iconSet.get(name);
 }
