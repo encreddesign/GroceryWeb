@@ -10,7 +10,12 @@
     float: left;
     width: 30%;
     height: 100vh;
-    border-right: 1px solid $color-second;
     background-color: $color-white;
+  }
+
+  &__mainpanel {
+    display: block;
+    float: left;
+    width: 70%;
   }
 }

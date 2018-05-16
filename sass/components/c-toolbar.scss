@@ -1,16 +1,46 @@
 /* ------ Toolbar ------ */
 
 .c-toolbar {
+  position: relative;
   display: block;
   padding: 10px;
   background-color: $color-second;
+  @include clearfix();
 
   &__title {
     display: block;
-    margin: 0;
+    width: 100%;
+    margin: 8px 0;
     font-size: $font-size-medium;
     line-height: $font-size-medium;
     text-transform: uppercase;
     color: $color-white;
+  }
+
+  &__links {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: auto;
+    height: 100%;
+
+    a {
+      display: inline-block;
+      height: 100%;
+      padding: 0 10px;
+      transition: all 0.3s ease-in-out;
+
+      svg {
+        display: block;
+        margin: 8px 0;
+        height: 70%;
+        fill: $color-white;
+      }
+
+      &:hover {
+        background-color: $color-first;
+      }
+    }
   }
 }
