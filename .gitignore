@@ -3,3 +3,6 @@ dist/
 
 #node
 node_modules/
+
+#other
+api_credentials.creds
