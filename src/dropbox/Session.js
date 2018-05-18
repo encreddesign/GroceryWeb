@@ -5,7 +5,6 @@ export default class Session {
 
   constructor(sessionKey, expire = 30) {
     this.sessionKey = sessionKey;
-    this.cookies = document.cookie;
     this.expire = expire;
   }
 
@@ -14,7 +13,7 @@ export default class Session {
    * @param {String} token
    */
   setSession(token) {
-    if(!token) {
+    if(token === null) {
       return;
     }
 
@@ -40,12 +39,27 @@ export default class Session {
   }
 
   /**
+   * Returns session
+   * @return {String}
+   */
+  getSession() {
+    const cookies = this.cookiesKeyValue();
+
+    if(cookies.get(this.sessionKey)) {
+      return cookies.get(this.sessionKey);
+    }
+
+    return null;
+  }
+
+  /**
    * Returns a map of available cookies
    * @return {Map}
    */
   cookiesKeyValue() {
     const map = new Map();
-    const eachCookie = this.cookies.split(";");
+    const cookies = document.cookie;
+    const eachCookie = cookies.split(";");
 
     if(eachCookie.length > 0) {
       for(let eachCookieI = 0; eachCookieI < eachCookie.length; eachCookieI++) {

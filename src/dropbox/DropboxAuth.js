@@ -1,5 +1,6 @@
 import React from "react";
-import { Dropbox } from "dropbox/src";
+import axios from "axios";
+import Params from "../helpers/Params";
 import Session from "./Session";
 import DropboxAuthFlow from "./DropboxAuthFlow";
 import DropboxConfig from "./DropboxConfig";
@@ -27,10 +28,48 @@ export default class DropboxAuth {
   }
 
   /**
+   * Returns auth code from params
+   * @return {String}
+   */
+  getAuthCode() {
+    return Params.get("code");
+  }
+
+  /**
    * Authenticate user by code
    * @param {String} code 
    */
   authenticateUser(code) {
-    window.location.href = DropboxAuthFlow.requestToken(code);
+    const tokenUrl = DropboxAuthFlow.requestToken(code);
+
+    const request = axios(
+      {
+        method: "post",
+        url: tokenUrl,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        responseType: "json"
+      }
+    );
+
+    return request;
+  }
+
+  /**
+   * Returns promise based on session set
+   * @param {String} token 
+   * @return {Promise}
+   */
+  setTokenSession(token) {
+    this.session.setSession(token);
+
+    return new Promise((resolve, reject) => {
+      if(this.session.isSet()) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
   }
 }
