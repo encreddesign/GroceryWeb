@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createStore } from "redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Reducers from "./reducers";
 
 import Site from "./routes/Site";
 
@@ -23,6 +25,8 @@ export default class GroceryWeb extends React.Component {
     )
   }
 }
+
+const store = createStore(Reducers);
 
 ReactDOM.render(
   <GroceryWeb />,

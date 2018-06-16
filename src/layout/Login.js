@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "redux";
 import Params from "../helpers/Params";
 import DropboxConfig from "../dropbox/DropboxConfig";
+import { authenticateDropboxUser } from "../actions";
 
 /**
  * @class Login
