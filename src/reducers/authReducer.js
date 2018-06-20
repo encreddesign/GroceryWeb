@@ -1,7 +1,8 @@
 import * as types from "../actions/actionTypes";
 
 const initialState = {
-  authInfo: undefined
+  authInfo: undefined,
+  authenticated: false
 };
 
 /**
@@ -12,7 +13,8 @@ export default function authReducer(state = initialState, action = {}) {
     case types.USER_AUTHENTICATED:
       return {
         ...state,
-        authInfo: action.authInfo
+        authenticated: action.authenticated,
+        authInfo: action.authInfo,
       };
     default:
       return state;

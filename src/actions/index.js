@@ -1,21 +1,26 @@
+import DropboxAuth from "../dropbox/DropboxAuth";
 import * as types from "./actionTypes";
 
 /**
  * Actions Index
  */
-export function authenticateDropboxUser(dropboxInstance, authCode, storeSession) {
-  return dispatch => {
-    dropboxInstance.authenticateUser(authCode)
-      .then((response) => {
-        storeSession(response.data);
+export function authenticateDropboxUser() {
+  const dropboxAuth = new DropboxAuth();
 
-        dispatch({ type: types.USER_AUTHENTICATED, authInfo: response.data});
-      }).catch((error) => {
-        // this.setState({
-        //   apiMessage: "Unable to connect to Dropbox"
-        // });
+  return dropboxAuth.authenticateUser(dropboxAuth.getAuthCode()).then((response) => {
+    const authInfo = response.data;
+    const authenticated = true;
 
-        console.error(`${DropboxConfig().tag}: ${error.message}`);
-      });
-  }
+      dropboxAuth.setTokenSession(response.data)
+      .then(_ => Params.resetState())
+      .catch(_ => console.error("User session failed, cannot set user cookie"));
+
+      dispatch({ type: types.USER_AUTHENTICATED, authInfo, authenticated });
+    }).catch((error) => {
+      // this.setState({
+      //   apiMessage: "Unable to connect to Dropbox"
+      // });
+
+      console.error(`${DropboxConfig().tag}: ${error.message}`);
+    });
 }

@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
+import { Provider } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Reducers from "./reducers";
 
 import Site from "./routes/Site";
+
+const store = createStore(Reducers);
 
 /**
  * @class GroceryWeb
@@ -26,9 +29,9 @@ export default class GroceryWeb extends React.Component {
   }
 }
 
-const store = createStore(Reducers);
-
 ReactDOM.render(
-  <GroceryWeb />,
+  <Provider store={store}>
+    <GroceryWeb />
+  </Provider>,
   document.getElementById('root')
 );

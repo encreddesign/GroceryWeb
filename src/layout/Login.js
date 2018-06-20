@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "redux";
+import { connect } from "react-redux";
 import Params from "../helpers/Params";
 import DropboxConfig from "../dropbox/DropboxConfig";
 import { authenticateDropboxUser } from "../actions";
@@ -7,7 +7,7 @@ import { authenticateDropboxUser } from "../actions";
 /**
  * @class Login
  */
-export default class Login extends React.Component {
+class Login extends React.Component {
 
   constructor(props) {
     super(props);
@@ -29,51 +29,12 @@ export default class Login extends React.Component {
         authenticating: true
       });
 
-      this.requestToken(authCode);
+      this.props.loadUserInfo();
     }
-  }
-
-  storeSession(data) {
-    if(data.access_token === null) {
-      return;
-    }
-
-    this.props.dropboxAuth.setTokenSession(data.access_token)
-      .then(() => {
-        this.setState({
-          authenticating: false,
-          authenticated: true
-        });
-
-        Params.resetState();
-      }).catch(() => {
-        this.setState({
-          apiMessage: "User session failed"
-        });
-
-        console.error("User session failed, cannot set user cookie");
-      });
-  }
-
-  requestToken(authCode) {
-    this.setState({
-      apiMessage: "Authenticating User"
-    });
-
-    this.props.dropboxAuth.authenticateUser(authCode)
-      .then((response) => {
-        this.storeSession(response.data);
-      }).catch((error) => {
-        this.setState({
-          apiMessage: "Unable to connect to Dropbox"
-        });
-
-        console.error(`${DropboxConfig().tag}: ${error.message}`);
-      });
   }
 
   render() {
-    if(!this.state.authenticating && !this.state.authenticated) {
+    if(!this.state.authenticating && !this.props.authenticated) {
       setTimeout(() => {
         this.setState({
           redirecting: true
@@ -85,7 +46,7 @@ export default class Login extends React.Component {
       }
     }
 
-    if(!this.state.authenticated) {
+    if(!this.props.authenticated) {
       return (
         <div className="l-login">
           <div className="l-login__wrapper">
@@ -99,3 +60,20 @@ export default class Login extends React.Component {
     return (<div data-user="user-session"></div>)
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.authenticated,
+    authInfo: state.authInfo
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadUserInfo() {
+      dispatch(authenticateDropboxUser())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
